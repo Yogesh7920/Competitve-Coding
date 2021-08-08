@@ -9,7 +9,7 @@ int prod(int a, int b) {
 
 vector<vector<int>> build(const vector<int>& arr) {
     int n = arr.size();
-    int p = floor(log(n) / log(2));
+    int p = floor(log(n) / log(2)); // Max power of 2 possible.
 
     vector<vector<int>> table(p+1, vector<int>(n));
 
@@ -24,15 +24,17 @@ vector<vector<int>> build(const vector<int>& arr) {
     return table;
 }
 
+// Works only for overlapping functions.
 int queries(const vector<vector<int>>& table, int l, int r) {
     int ln = r-l+1;
     int p = floor(log(ln) / log(2));
 
     int left = table[p][l];
-    int right = table[p][r - (1 << p) + 1];
+    int right = table[p][r - (1 << p) + 1]; // p, r - 2^p + 1.
     return min(left, right);
 }
 
+// ! Use fenwick's tree instead.
 int cascade_queries(const vector<vector<int>>& table, int l, int r) {
     int ln = r-l+1;
     int p = floor(log(ln) / log(2));

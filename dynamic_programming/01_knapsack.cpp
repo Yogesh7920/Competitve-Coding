@@ -4,9 +4,9 @@ using namespace std;
 typedef long long int ll;
 
 int knapsack(int s, int n, vector<int> ws, vector<int> ps) {
-    vector<int> dp(s+1, 0);
+    vector<int> dp(s+1, 0); // use 1-d if u want to find only the max value and not the elements itself.
     for (int i=1; i<=n; i++) {
-        for (int j=s; j>=ws[i]; j--) {
+        for (int j=s; j>=ws[i]; j--) { // run from right to left for O(1) storage. 
             if (ws[i] <= j) {
                 dp[j] = max(ps[i] + dp[j - ws[i]], dp[j]);
             }

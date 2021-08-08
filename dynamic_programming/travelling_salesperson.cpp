@@ -4,6 +4,8 @@ using namespace std;
 typedef long long int ll;
 unordered_map<int, unordered_map<int, int>> dp;
 
+// * DP with bitmasking
+
 int travelling_salesperson(const vector<vector<int>> &cost, int start, int cur, int need, int n)
 {
     if (dp[cur].count(need))

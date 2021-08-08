@@ -3,11 +3,14 @@ using namespace std;
 
 typedef long long int ll;
 
-int lsb(int x) {
+int lsb(int x) {    
+    // 2's compement will have first 1 from left unchanged and 
+    // thus we will get the least significant bit.
     return (x & -x);
 }
+// * Very Important : index starts from 1 in fenwick tree.
 
-void build(vector<int> &arr) {
+void build(vector<int> &arr) {  // O(n)
     int n = arr.size();
     for (int i=1; i<=n; i++) {
         int p = i + lsb(i);
@@ -17,7 +20,7 @@ void build(vector<int> &arr) {
     }
 }
 
-int prefix(const vector<int> &arr, int x) {
+int prefix(const vector<int> &arr, int x) { // O (log n)
     int ans = 1;
     while (x > 0) {
         ans *= arr[x-1];
@@ -27,7 +30,7 @@ int prefix(const vector<int> &arr, int x) {
 }
 
 int query(const vector<int> &arr, int l, int r) {
-    return (prefix(arr, r) / prefix(arr, l-1));
+    return (prefix(arr, r) / prefix(arr, l-1)); // * (l-1) as l is inclusive.
 }
 
 void update(vector<int> &arr, int x, int v) {

@@ -6,14 +6,14 @@ typedef long long int ll;
 ll ans, ct=0;
 int k;
 const ll mx = 2e6;
-int trie[mx][26];
-int ters[mx];
+int trie[mx][26]; // use array over class or map.
+int ters[mx]; // terminals
 
 void dfs(int u, int d=0) {
     for (auto v: trie[u]) {
         if (v) {
             dfs(v, d+1);
-            ters[u] += ters[v];
+            ters[u] += ters[v]; // add the terms from lower nodes to parent.
         }
     }
 
