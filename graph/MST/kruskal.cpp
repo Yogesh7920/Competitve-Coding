@@ -13,6 +13,7 @@ int find(int x) {
 }
 
 void join(int a, int b) {
+    // bigger tree gets to the parent of the smaller one.
     int p1 = find(a);
     int p2 = find(b);
     if (r[p1] > r[p2]) {

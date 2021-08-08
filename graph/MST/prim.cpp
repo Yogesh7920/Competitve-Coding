@@ -12,7 +12,7 @@ int prim(int x, int n) {
         visits[x] = true;
         for (auto y: g[x]) {
             if (!visits[y[1]])
-               q.push(y);
+                q.push(y);
         }
 
         while (!q.empty()) {

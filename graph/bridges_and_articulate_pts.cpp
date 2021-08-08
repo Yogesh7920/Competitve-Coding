@@ -51,12 +51,12 @@ void solve() {
     }
     cout << pts.size() << endl;
     for (auto x: pts) {
-        cout << x <<  ;
+        cout << x << " ";
     }
     cout << endl;
     cout << bgs.size() << endl;
     for (auto x: bgs) {
-        cout << x[0] <<   << x[1] << endl;
+        cout << x[0] << " " << x[1] << endl;
     }
     cout << endl;
 }

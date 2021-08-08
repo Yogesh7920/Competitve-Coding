@@ -23,10 +23,7 @@ void solve() {
         }
     }
 
-//    for(auto x: kmp) {
-//        cout << x << "\t";
-//    }
-//    cout << endl;
+
     int ans = 0;
     i=0; j=0;
     while (i < n) {
