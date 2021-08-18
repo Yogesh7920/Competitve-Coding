@@ -13,19 +13,21 @@ void dfs(int u, int p=-1) {
     int child = 0;
     disc[u] = time_; low[u] = time_; time_++ ;
     for (auto v : adj[u]) {
-        if (v == p) continue;
+        if (v == p) continue; // parent is not a back edge.
         else if (disc[v] != -1) {
             low[u] = min(low[u], disc[v]);
         } else {
-            child++;
+            child++; // only unseen child should be counted (not all children)
             dfs(v, u);
             low[u] = min(low[u], low[v]);
-        }
-        if (low[v] >= disc[u]) {
-            if (p != -1)
-                pts.insert(u);
-            if (low[v] > disc[u]) {
-                bgs.insert({min(u, v), max(u, v)});
+
+            if (low[v] >= disc[u]) { 
+                // * This comparision should be done inside the else block as doing it outside will lead to duplicates.
+                if (p != -1)
+                    pts.insert(u);
+                if (low[v] > disc[u]) { // Equality holds only when cycle exists and thus brigde can't exist.
+                    bgs.insert({min(u, v), max(u, v)});
+                }
             }
         }
     }
