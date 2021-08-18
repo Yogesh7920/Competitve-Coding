@@ -34,6 +34,32 @@ int queries(const vector<vector<int>>& table, int l, int r) {
     return min(left, right);
 }
 
+
+pair<vector<vector<int>>, vector<vector<int>>> build_with_index(const vector<int>& nums, int n) {
+    double t = log(n) / log(2);
+    int p = (int)t;
+    vector<vector<int>> sparse(p+1, vector<int>(n, -1)), sparse_index(p+1, vector<int>(n, -1));
+    copy(nums.begin(), nums.end(), sparse[0].begin());
+    for (int i=0; i<n; i++) sparse_index[0][i] = i;
+
+    for (int i=1; i<=p; i++) {
+        int end = n - (1 << i) + 1;
+        for (int j=0; j<end; j++) {
+            sparse[i][j] = min(sparse[i-1][j], sparse[i-1][j + (1 << (i-1))]);
+            sparse_index[i][j] = (sparse[i-1][j] == sparse[i][j]) ? sparse_index[i-1][j] : sparse_index[i-1][j + (1 << (i-1))];
+        }
+    }
+    return make_pair(sparse, sparse_index);
+}
+
+int query_with_index(const vector<int>& nums, const vector<vector<int>>& sparse_index, int l, int r) {
+    int ln = r - l + 1;
+    double t = log(ln) / log(2);
+    int p = (int)t;
+    int i1 = sparse_index[p][l-1], i2 = sparse_index[p][r - (1 << p)];
+    return min(nums[i1], nums[i2]);
+}
+
 // ! Use fenwick's tree instead.
 int cascade_queries(const vector<vector<int>>& table, int l, int r) {
     int ln = r-l+1;
