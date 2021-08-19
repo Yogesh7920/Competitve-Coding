@@ -56,7 +56,7 @@ int query_with_index(const vector<int>& nums, const vector<vector<int>>& sparse_
     int ln = r - l + 1;
     double t = log(ln) / log(2);
     int p = (int)t;
-    int i1 = sparse_index[p][l-1], i2 = sparse_index[p][r - (1 << p)];
+    int i1 = sparse_index[p][l], i2 = sparse_index[p][r - (1 << p) + 1];
     return min(nums[i1], nums[i2]);
 }
 
